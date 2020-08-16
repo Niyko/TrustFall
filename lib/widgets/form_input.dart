@@ -9,6 +9,7 @@ class IconFormInput extends StatefulWidget {
     this.icon,
     this.onChanged,
     this.obscureText = false,
+    this.maxLength = 20,
     this.keyboardType = TextInputType.text
   }) : super(key: key);
 
@@ -16,6 +17,7 @@ class IconFormInput extends StatefulWidget {
   final IconData icon;
   final Function onChanged;
   final bool obscureText;
+  final int maxLength;
   final TextInputType keyboardType;
 
   @override
@@ -56,6 +58,7 @@ class _IconFormInputState extends State<IconFormInput> {
               ),
               Expanded(
                 child: TextField(
+                  maxLength: widget.maxLength,
                   keyboardType: widget.keyboardType,
                   inputFormatters: (widget.keyboardType==TextInputType.number)? <TextInputFormatter>[
                     WhitelistingTextInputFormatter.digitsOnly
@@ -68,6 +71,7 @@ class _IconFormInputState extends State<IconFormInput> {
                   decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: widget.hint,
+                      counterText: "",
                   ),
                 ),
               ),

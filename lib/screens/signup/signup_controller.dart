@@ -96,7 +96,7 @@ class SignupPageState extends State<SignupPageController> {
             isPostiveBtnEnabled: true,
             postiveBtnText: "sign in",
             postiveBtnOnClick: (){
-              //widget.startapp.changeRoute("/spal", context);
+              widget.startapp.changeRoute("/login", context);
             },
             context: context,
           ).show();
@@ -105,7 +105,8 @@ class SignupPageState extends State<SignupPageController> {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           prefs.setBool('is-user-signed-in', true);
           prefs.setInt('user-id', returnedData['user_id']);
-          widget.startapp.changeRoute("/login", context);
+          Navigator.pop(context);
+          widget.startapp.changeRoute("/home", context);
         }
         else showOtherErrorModal();
       }
@@ -132,6 +133,11 @@ class SignupPageState extends State<SignupPageController> {
       isCloseEnabled: true,
       context: context,
     ).show();
+  }
+
+  void openLogin(){
+    Navigator.pop(context);
+    widget.startapp.changeRoute("/login", context);
   }
 
 }

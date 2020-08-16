@@ -78,9 +78,9 @@ class HomeView {
                                   color: Color(0xfff1f1f1), // button color
                                   child: InkWell(
                                     splashColor: Colors.black12, // splash color
-                                    onTap: () {}, // button pressed
+                                    onTap: () => homeState.logout(), // button pressed
                                     child: Icon(
-                                      OMIcons.person,
+                                      OMIcons.noEncryption,
                                       color: ThemeColors().grey,
                                     ),
                                   ),
@@ -94,9 +94,18 @@ class HomeView {
                         ),
                         Row(
                           children: <Widget>[
-                            HomeTextGraph(),
-                            HomeTextGraph(),
-                            HomeTextGraph()
+                            HomeTextGraph(
+                              text: "falls detected",
+                              value: (homeState.userDetails==null)?"":homeState.userDetails.falls_detected.toString(),
+                            ),
+                            HomeTextGraph(
+                              text: "falls answered",
+                              value: (homeState.userDetails==null)?"":homeState.userDetails.falls_answered.toString(),
+                            ),
+                            HomeTextGraph(
+                              text: "falls accuracy",
+                              value: "90%",
+                            ),
                           ],
                         ),
                         //-------------------------------

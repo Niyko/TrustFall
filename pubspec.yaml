@@ -17,6 +17,10 @@ dependencies:
   shared_preferences: ^0.5.8
   shimmer: ^1.1.1
   pull_to_refresh: ^1.6.0
+  flutter_launcher_icons: ^0.7.4
+  lottie: ^0.5.1
+  sa_stateless_animation: ^1.0.1
+  supercharged: ^1.10.0
 
 dev_dependencies:
   flutter_test:
@@ -26,6 +30,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/anim/
   fonts:
     - family: Raleway
       fonts:
@@ -42,3 +47,8 @@ flutter:
           weight: 600
         - asset: fonts/Raleway/Raleway-Bold.ttf
           weight: 700
+
+flutter_icons:
+  image_path: "assets/images/app_icon.png"
+  android: true
+  ios: true

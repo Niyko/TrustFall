@@ -5,6 +5,8 @@ class UserDetailsModel {
   String password;
   String emergency_contact;
   int current_status;
+  int falls_detected;
+  int falls_answered;
 
   UserDetailsModel({
     this.user_id,
@@ -12,6 +14,8 @@ class UserDetailsModel {
     this.username,
     this.password,
     this.emergency_contact,
-    this.current_status
+    this.current_status,
+    this.falls_detected,
+    this.falls_answered
   });
 }

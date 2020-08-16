@@ -23,7 +23,7 @@ class _HomeTextGraphState extends State<HomeTextGraph> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          if(widget.text!="") Text(
+          if(widget.value!="") Text(
             widget.value,
             textAlign: TextAlign.left,
             style: TextStyle(
@@ -31,7 +31,7 @@ class _HomeTextGraphState extends State<HomeTextGraph> {
               color: ThemeColors().black,
             ),
           ),
-          if(widget.text=="") Column(
+          if(widget.value=="") Column(
             children: <Widget>[
               SizedBox(
                 width: 30,
@@ -50,7 +50,7 @@ class _HomeTextGraphState extends State<HomeTextGraph> {
           SizedBox(
             height: 3,
           ),
-          if(widget.text!="") Text(
+          if(widget.value!="") Text(
             widget.text.toUpperCase(),
             textAlign: TextAlign.left,
             style: TextStyle(
@@ -59,7 +59,7 @@ class _HomeTextGraphState extends State<HomeTextGraph> {
                 fontWeight: FontWeight.w700
             ),
           ),
-          if(widget.text=="") Column(
+          if(widget.value=="") Column(
             children: <Widget>[
               SizedBox(
                 width: 80,

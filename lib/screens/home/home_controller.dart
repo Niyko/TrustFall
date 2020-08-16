@@ -1,12 +1,16 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trustfall/main.dart';
 import 'package:trustfall/models/app_env.dart';
 import 'package:trustfall/models/user_details_model.dart';
 import 'package:trustfall/screens/home/home_view.dart';
 import 'package:http/http.dart' as http;
+import 'package:trustfall/widgets/modal.dart';
+import 'package:trustfall/widgets/popup.dart';
 
 class HomeController extends StatefulWidget {
   final StartAppState startapp;
@@ -25,6 +29,7 @@ class HomeController extends StatefulWidget {
 class HomeState extends State<HomeController> {
   UserDetailsModel userDetails;
   bool isSwipeLoading = false;
+  bool isViewClosed = false;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   HomeView homeView = HomeView();
 
@@ -37,6 +42,12 @@ class HomeState extends State<HomeController> {
   @override
   Widget build(BuildContext context) {
     return homeView.get(this, scaffoldKey);
+  }
+
+
+  @override
+  void dispose() {
+    isViewClosed = true;
   }
 
   onSwipeToRefresh() {
@@ -52,7 +63,7 @@ class HomeState extends State<HomeController> {
   getUserDetails() async{
     String url = AppEnv().api_url + "user_details.php?mobile=9287548490&password=yyktyk";
     Response response = await get(url).timeout(
-      const Duration(seconds: 20),
+      const Duration(seconds: 5),
       onTimeout: () {
         return null;
       },
@@ -63,7 +74,7 @@ class HomeState extends State<HomeController> {
 
     if(responseCode==200){
       var returnedData = json.decode(response.body);
-      if(returnedData["code"]=="user-found"){
+      if(returnedData["code"]=="user-found" && !isViewClosed){
         setState(() {
           userDetails = UserDetailsModel(
               user_id: returnedData['user_details']['user_id'],
@@ -71,10 +82,44 @@ class HomeState extends State<HomeController> {
               username: returnedData['user_details']['username'],
               password: returnedData['user_details']['password'],
               emergency_contact: returnedData['user_details']['emergency_contact'],
-              current_status: returnedData['user_details']['current_status']
+              current_status: returnedData['user_details']['current_status'],
+              falls_detected: returnedData['user_details']['falls_detected'],
+              falls_answered: returnedData['user_details']['falls_answered']
           );
         });
       }
     }
+    else {
+      if(!isViewClosed) {
+        InfoModal(
+          title: "No internet connection",
+          description: "Connection to the internet failed, Please turn on the internet connection",
+          isPostiveBtnEnabled: true,
+          postiveBtnText: "Retry",
+          postiveBtnOnClick: () {
+            Navigator.of(context).pop();
+            getUserDetails();
+          },
+          context: context,
+        ).show();
+      }
+    }
+  }
+
+  logout() async{
+    InfoModal(
+        title: "Signing out?",
+        description: "Are you sure you want to sign out from this account",
+        isCloseEnabled: true,
+        isPostiveBtnEnabled: true,
+        postiveBtnText: "Sign out",
+        postiveBtnOnClick: () async {
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          prefs.setBool('is-user-signed-in', false);
+          Navigator.of(context).pop();
+          widget.startapp.changeRoute('/login', context);
+        },
+        context: context,
+    ).show();
   }
 }

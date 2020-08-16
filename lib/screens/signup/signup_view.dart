@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:trustfall/theme.dart';
 import 'package:trustfall/widgets/form_input.dart';
 import 'package:trustfall/widgets/primary_button.dart';
@@ -25,7 +26,9 @@ class SignupView {
                             color: Colors.transparent, // button color
                             child: InkWell(
                               splashColor: Colors.black26, // splash color
-                              onTap: () {}, // button pressed
+                              onTap: () {
+                                SystemNavigator.pop();
+                              }, // button pressed
                               child: Icon(
                                 Icons.arrow_back,
                                 color: Color(0xff09090B),
@@ -72,6 +75,7 @@ class SignupView {
                         ),
                         IconFormInput(
                             hint: "Mobile No",
+                            maxLength: 10,
                             keyboardType: TextInputType.number,
                             icon: OMIcons.call,
                             onChanged: (text) => signupPageState.mobile = text
@@ -79,12 +83,14 @@ class SignupView {
                         IconFormInput(
                             hint: "Your Password",
                             icon: OMIcons.lock,
+                            maxLength: 10,
                             obscureText: true,
                             onChanged: (text) => signupPageState.password = text
                         ),
                         IconFormInput(
                             hint: "Emergency Contact No",
                             icon: OMIcons.howToReg,
+                            maxLength: 10,
                             keyboardType: TextInputType.number,
                             onChanged: (text) => signupPageState.emergency_contact = text
                         ),
@@ -111,11 +117,16 @@ class SignupView {
                             SizedBox(
                               width: 5,
                             ),
-                            Text(
-                              "Login here".toUpperCase(),
-                              style: TextStyle(
-                                color: ThemeColors().dark_yellow,
-                                fontWeight: FontWeight.w700
+                            GestureDetector(
+                              onTap: (){
+                                signupPageState.openLogin();
+                              },
+                              child: Text(
+                                "Login here".toUpperCase(),
+                                style: TextStyle(
+                                  color: ThemeColors().dark_yellow,
+                                  fontWeight: FontWeight.w700
+                                ),
                               ),
                             )
                           ],

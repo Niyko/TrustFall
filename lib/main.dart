@@ -22,6 +22,7 @@ class StartAppState extends State<StartApp> {
   Widget build(BuildContext context) {
     return new MaterialApp(
       theme: currentTheme,
+      title: "TrustFall",
       home: new SplashScreenController(
           startapp: this
       ),
