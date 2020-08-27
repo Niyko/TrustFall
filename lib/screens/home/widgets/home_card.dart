@@ -53,7 +53,7 @@ class _HomeCardState extends State<HomeCard> {
             color: widget.color,
             child: InkWell(
               splashColor: widget.splashColor, // splash color
-              onTap: () {},
+              onTap: () => widget.onClick(),
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 20.0),
                 child: Column(

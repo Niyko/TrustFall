@@ -122,7 +122,7 @@ class HomeView {
                                 textColor: ThemeColors().black,
                                 image: ExactAssetImage("assets/images/home_bolt.png"),
                                 onClick: (){
-
+                                  homeState.dora();
                                 },
                               ),
                             ),

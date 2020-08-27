@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:trustfall/screens/about/about_controller.dart';
+import 'package:trustfall/screens/sending/sending_controller.dart';
 import 'main.dart';
 import 'screens/splash_screen/splash_screen_controller.dart';
 import 'screens/signup/signup_controller.dart';
@@ -13,6 +14,8 @@ class Routes{
       '/signup': (context) => SignupPageController(startapp: startAppState),
       '/login': (context) => LoginController(startapp: startAppState),
       '/home': (context) => HomeController(startapp: startAppState),
+      '/about': (context) => AboutController(startapp: startAppState),
+      '/sending': (context) => SendingController(startapp: startAppState),
     };
   }
 }

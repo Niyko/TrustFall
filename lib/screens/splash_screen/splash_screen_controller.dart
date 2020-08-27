@@ -39,13 +39,19 @@ class SplashScreenState extends State<SplashScreenController> {
   void _continueApp() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool isUserSigned = prefs.getBool('is-user-signed-in');
+    bool isFallDetected = prefs.getBool('is-fall-detected');
     if(isUserSigned==null) isUserSigned = false;
+    if(isFallDetected==null) isFallDetected = false;
     Timer(
         Duration(seconds: 5),
             () => setState(() {
               Navigator.pop(context);
-              if(isUserSigned)
-                widget.startapp.changeRoute('/home', context);
+              if(isUserSigned) {
+                if(isFallDetected)
+                  widget.startapp.changeRoute('/sending', context);
+                else
+                  widget.startapp.changeRoute('/home', context);
+              }
               else
                 widget.startapp.changeRoute('/signup', context);
             }));

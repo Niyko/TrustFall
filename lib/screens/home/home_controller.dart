@@ -122,4 +122,9 @@ class HomeState extends State<HomeController> {
         context: context,
     ).show();
   }
+
+  dora(){
+    Navigator.of(context).pop();
+    widget.startapp.changeRoute("/sending", context);
+  }
 }
