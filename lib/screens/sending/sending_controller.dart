@@ -1,13 +1,17 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trustfall/main.dart';
 import 'package:trustfall/models/app_env.dart';
 import 'package:trustfall/screens/sending/sending_view.dart';
+import 'package:trustfall/theme.dart';
 import 'package:trustfall/widgets/modal.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SendingController extends StatefulWidget {
   final StartAppState startapp;
@@ -53,11 +57,11 @@ class SendingState extends State<SendingController> with SingleTickerProviderSta
   }
 
   sendBeacon(BuildContext context) async {
-    String mobile = "9287548490";
-    String password = "yyktyk";
-    String url = AppEnv().api_url + "send_beacon.php?mobile=${mobile}&password=${password}";
-
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    String userMobile = prefs.getString('user-mob');
+    String userPassword = prefs.getString('user-pass');
+    String url = AppEnv().api_url + "send_beacon.php?mobile=${userMobile}&password=${userPassword}";
+
     prefs.setBool('is-fall-detected', false);
 
     Response response = await get(url).timeout(
@@ -73,6 +77,20 @@ class SendingState extends State<SendingController> with SingleTickerProviderSta
 
     if(responseCode==200){
       progressAnimationController.forward();
+      progressAnimationController.addStatusListener((status) {
+        if(status==AnimationStatus.completed){
+          SystemNavigator.pop();
+          Fluttertoast.showToast(
+              msg: "Distress beacon has been sent",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: ThemeColors().grey,
+              textColor: Colors.white,
+              fontSize: 16.0
+          );
+        }
+      });
     }
   }
 

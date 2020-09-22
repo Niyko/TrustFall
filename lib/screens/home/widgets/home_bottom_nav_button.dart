@@ -29,7 +29,7 @@ class _HomeBottomNavButtonState extends State<HomeBottomNavButton> {
           color: Colors.white, // button color
           child: InkWell(
             splashColor: Colors.black12, // splash color
-            onTap: () {}, // button pressed
+            onTap: () => widget.onClick(), // button pressed
             child: Padding(
               padding: const EdgeInsets.fromLTRB(0, 11.0, 0, 9.0),
               child: Column(

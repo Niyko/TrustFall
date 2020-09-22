@@ -73,6 +73,8 @@ class LoginState extends State<LoginController> {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           prefs.setBool('is-user-signed-in', true);
           prefs.setInt('user-id', returnedData['user_details']['id']);
+          prefs.setString('user-mob', returnedData['user_details']['mobile']);
+          prefs.setString('user-pass', returnedData['user_details']['password']);
           Navigator.pop(context);
           widget.startapp.changeRoute("/home", context);
         }

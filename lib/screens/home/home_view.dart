@@ -122,7 +122,7 @@ class HomeView {
                                 textColor: ThemeColors().black,
                                 image: ExactAssetImage("assets/images/home_bolt.png"),
                                 onClick: (){
-                                  homeState.dora();
+                                  homeState.featureNotAvailable();
                                 },
                               ),
                             ),
@@ -138,7 +138,7 @@ class HomeView {
                                 splashColor: Colors.white.withOpacity(0.3),
                                 image: ExactAssetImage("assets/images/home_phone.png"),
                                 onClick: (){
-
+                                  homeState.featureNotAvailable();
                                 },
                               ),
                             ),
@@ -159,7 +159,7 @@ class HomeView {
                                 image: ExactAssetImage("assets/images/home_share.png"),
                                 imageWidth: 60.0,
                                 onClick: (){
-
+                                  homeState.featureNotAvailable();
                                 },
                               ),
                             ),
@@ -193,7 +193,9 @@ class HomeView {
                                                 color: Colors.white,
                                                 child: InkWell(
                                                   splashColor: Colors.grey.withOpacity(0.2), // splash color
-                                                  onTap: () {},
+                                                  onTap: (){
+                                                    homeState.featureNotAvailable();
+                                                  },
                                                   child: Column(
                                                     crossAxisAlignment: CrossAxisAlignment.center,
                                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -243,18 +245,30 @@ class HomeView {
                     HomeBottomNavButton(
                       title: "Home",
                       image: ExactAssetImage("assets/images/home_bottom_nav_home.png"),
+                      onClick: (){
+                        homeState.featureNotAvailable();
+                      },
                     ),
                     HomeBottomNavButton(
                       title: "Inbox",
                       image: ExactAssetImage("assets/images/home_bottom_nav_inbox.png"),
+                      onClick: (){
+                        homeState.featureNotAvailable();
+                      },
                     ),
                     HomeBottomNavButton(
                       title: "Find",
                       image: ExactAssetImage("assets/images/home_bottom_nav_find.png"),
+                      onClick: (){
+                        homeState.featureNotAvailable();
+                      },
                     ),
                     HomeBottomNavButton(
                       title: "More",
                       image: ExactAssetImage("assets/images/home_bottom_nav_more.png"),
+                      onClick: (){
+                        homeState.featureNotAvailable();
+                      },
                     )
                   ],
                 ),

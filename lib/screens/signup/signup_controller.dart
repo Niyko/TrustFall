@@ -105,6 +105,8 @@ class SignupPageState extends State<SignupPageController> {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           prefs.setBool('is-user-signed-in', true);
           prefs.setInt('user-id', returnedData['user_id']);
+          prefs.setString('user-mob', map['mobile']);
+          prefs.setString('user-pass', map['password']);
           Navigator.pop(context);
           widget.startapp.changeRoute("/home", context);
         }

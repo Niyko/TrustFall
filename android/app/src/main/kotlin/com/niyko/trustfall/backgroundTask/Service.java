@@ -72,7 +72,7 @@ public class Service extends android.app.Service {
             Log.i(TAG, "restarting foreground");
             try {
                 Notification notification = new Notification();
-                startForeground(NOTIFICATION_ID, notification.setNotification(this, "Service notification", "This is the service's notification", R.drawable.ic_sleep));
+                startForeground(NOTIFICATION_ID, notification.setNotification(this, "TrustFall is running..", "You can securely ride without fear", R.drawable.ic_sleep));
                 Log.i(TAG, "restarting foreground successful");
                 startTimer();
             } catch (Exception e) {

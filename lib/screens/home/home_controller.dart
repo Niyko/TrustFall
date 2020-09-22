@@ -61,7 +61,11 @@ class HomeState extends State<HomeController> {
   }
 
   getUserDetails() async{
-    String url = AppEnv().api_url + "user_details.php?mobile=9287548490&password=yyktyk";
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String userMobile = prefs.getString('user-mob');
+    String userPassword = prefs.getString('user-pass');
+    String url = AppEnv().api_url + "user_details.php?mobile=${userMobile}&password=${userPassword}";
+
     Response response = await get(url).timeout(
       const Duration(seconds: 5),
       onTimeout: () {
@@ -126,5 +130,14 @@ class HomeState extends State<HomeController> {
   dora(){
     Navigator.of(context).pop();
     widget.startapp.changeRoute("/sending", context);
+  }
+
+  featureNotAvailable(){
+    InfoModal(
+      title: "Feature not available",
+      description: "Connection to the internet failed, Please turn on the internet connection",
+      isCloseEnabled: true,
+      context: context,
+    ).show();
   }
 }
