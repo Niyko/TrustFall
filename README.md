@@ -4,7 +4,7 @@ TrustFall user's Android app (this repo) is mainly build on Flutter, Fall detect
 
  ### :triangular_ruler: Download
  Download the APK file from an external source. Go to Settings, choose Security and enable Unknown Souces to install APK files from external source.<br><br>
-<img src="https://i.imgur.com/k2G6cSo.png" height="45">
+<a href="https://bit.ly/get-trustfall"><img src="https://i.imgur.com/k2G6cSo.png" height="45"></a>
 
  ### :page_with_curl: License
 TrustFall is licensed under the [MIT License](https://github.com/Niyko/TrustFall/blob/master/LICENSE).
